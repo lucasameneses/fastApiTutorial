@@ -1,0 +1,43 @@
+@app.get('/get-item/{item_id}')
+def get_item(item_id: str):
+
+    drugList = list(filter(lambda drug: drug['id'] == int(item_id), drugstore))
+
+    if drugList == []:
+        return {'Error': 'Drug does not exist'}
+
+    return {'Drug': drugList[0]}
+
+
+@app.get('/get-by-name')
+def get_item(name: Optional[str] = None):
+
+    drugList = list(filter(lambda x: x["name"] == name, drugstore))
+
+    if drugList == []:
+        return {'Error': 'Drug does not exist'}
+
+    return {'Drug': drugList[0]}
+
+
+drugstore = [
+    {   'id': 1,
+        'name': 'dorflex',
+        'price': 2.5
+        },
+    {
+        'id': 2,
+        'name': 'minoxidil',
+        'price': 10
+    },
+    {
+        'id': 3,
+        'name': 'teste de gravidez',
+        'price': 3.2
+    },
+    {
+        'id': 4,
+        'name': 'Se pesar',
+        'price': 0
+    }
+]
